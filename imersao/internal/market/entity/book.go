@@ -85,18 +85,24 @@ func (b *Book) AddTransaction(transaction *Transaction, waitGroup *sync.WaitGrou
 	}
 
 	transaction.SellingOrder.Investor.UpdateAssertPosition(transaction.SellingOrder.Assert.ID, -minShares)
+
+	// TODO - Método para simplificar açoes
 	transaction.SellingOrder.PendingShares -= minShares
 
 	transaction.BuyingOrder.Investor.UpdateAssertPosition(transaction.BuyingOrder.Assert.ID, minShares)
+
+	// TODO - Método para simplificar açoes
 	transaction.BuyingOrder.PendingShares -= minShares
 
 	// TODO - Calculate transaction total
 	transaction.Total = float64(transaction.Shares) * transaction.Price
 
+	// TODO - Método para simplificar açoes
 	if transaction.BuyingOrder.PendingShares == 0 {
 		transaction.BuyingOrder.Status = "CLOSED"
 	}
 
+	// TODO - Método para simplificar açoes
 	if transaction.SellingOrder.PendingShares == 0 {
 		transaction.SellingOrder.Status = "CLOSED"
 	}
