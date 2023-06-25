@@ -90,6 +90,7 @@ func (b *Book) AddTransaction(transaction *Transaction, waitGroup *sync.WaitGrou
 	transaction.BuyingOrder.Investor.UpdateAssertPosition(transaction.BuyingOrder.Assert.ID, minShares)
 	transaction.BuyingOrder.PendingShares -= minShares
 
+	// TODO - Calculate transaction total
 	transaction.Total = float64(transaction.Shares) * transaction.Price
 
 	if transaction.BuyingOrder.PendingShares == 0 {
